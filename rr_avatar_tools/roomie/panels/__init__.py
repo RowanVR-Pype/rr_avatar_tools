@@ -1,4 +1,5 @@
 from . import main
+from . import everything
 from . import export
 from . import setup
 
@@ -7,6 +8,7 @@ modules = (
     main,
     export,
     setup,
+    everything,
 )
 
 
