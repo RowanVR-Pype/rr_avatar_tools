@@ -124,7 +124,7 @@ def update_roomie_export_list(scene):
     export_list.clear()
 
     for i, collection in enumerate(roomie_item_collections):
-        valid = collection.name[:3] in ("RB_",)
+        valid = collection.name[:4] in ("RM1_",)
 
         # Add to export list
         export_list.add()

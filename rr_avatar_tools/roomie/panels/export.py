@@ -158,21 +158,6 @@ class SCENE_PT_RRAvatarToolsRoomieExportPanel(RecRoomRoomiePanel):
             "rr.export_toggle_roomie_item_visibility_by_lod", text="LOD2"
         ).lod = "LOD2"
 
-        # Collection visibility buttons
-        row = layout.row(align=True)
-        row.emboss = "PULLDOWN_MENU"
-        fb_collection = bpy.context.view_layer.layer_collection.children.get(
-            "Full_Body"
-        )
-        if fb_collection:
-            row.prop(fb_collection, "hide_viewport", text="Full Body")
-
-        mb_collection = bpy.context.view_layer.layer_collection.children.get(
-            "Modern_Bean_Body"
-        )
-        if mb_collection:
-            row.prop(mb_collection, "hide_viewport", text="Modern Bean")
-
         children = rr_avatar_tools.data.roomie_items
         rows = 5 if children else 3
 

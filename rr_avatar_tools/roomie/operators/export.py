@@ -76,7 +76,7 @@ class RR_OT_ExportRoomieItems(RecRoomRoomieOperator):
     @classmethod
     def export_collections(cls):
         return [
-            c for c in rr_avatar_tools.data.roomie_items if c.name.startswith("RB_")
+            c for c in rr_avatar_tools.data.roomie_items if c.name.startswith("RM1_")
         ]
 
     def layer_collections(self):
