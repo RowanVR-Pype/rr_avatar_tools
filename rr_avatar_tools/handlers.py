@@ -95,6 +95,53 @@ def update_avatar_export_list(scene):
         scene.avatar_export_list_index = len(export_list) - 1
 
 
+@bpy.app.handlers.persistent
+def update_roomie_export_list(scene):
+    def get_type_from_name(name):
+        return name.split("_")[-1].upper()
+
+    export_list = scene.roomie_export_list
+
+    roomie_item_collections: List[bpy.types.Collection]
+    roomie_item_collections = [i for i in rr_avatar_tools.data.roomie_items]
+
+    # Check if the export list and child collections are still in sync
+    if len(roomie_item_collections) == len(export_list):
+        uuids = [c.get("rec_room_roomie_uuid") for c in roomie_item_collections]
+        types = [get_type_from_name(c.name) for c in roomie_item_collections]
+
+        data = zip(uuids, types, export_list)
+
+        # Ensure uuids and types are in sync
+        if all(
+            uuid_ == prop.uuid and type_ == prop.type() for uuid_, type_, prop in data
+        ):
+            return
+
+    lookup = {prop.uuid: prop.select for prop in export_list}
+
+    # Recreate export list from collections
+    export_list.clear()
+
+    for i, collection in enumerate(roomie_item_collections):
+        valid = collection.name[:3] in ("RB_",)
+
+        # Add to export list
+        export_list.add()
+        export_list[i].name = collection.name
+        export_list[i].uuid = collection["rec_room_roomie_uuid"]
+
+        # Preserve selection
+        select = lookup.get(collection["rec_room_roomie_uuid"])
+        if select != None:
+            export_list[i].select = select
+
+        export_list[i].select &= valid
+
+    if scene.avatar_export_list_index >= len(export_list):
+        scene.avatar_export_list_index = len(export_list) - 1
+
+
 def body_meshes() -> List[bpy.types.Object]:
     names = (
         "BodyMesh_LOD0",
@@ -311,6 +358,7 @@ def check_for_next_diagnostic_run():
 
 depsgraph_handlers = (
     update_avatar_export_list,
+    update_roomie_export_list,
     update_mask_list,
     check_for_avatar_item_selection_change,
     run_diagnostics_on_scene_update,

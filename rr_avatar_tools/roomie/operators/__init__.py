@@ -1,6 +1,7 @@
 from . import setup
+from . import export
 
-modules = (setup,)
+modules = (setup, export)
 
 
 classes = sum([p.classes for p in modules], ())

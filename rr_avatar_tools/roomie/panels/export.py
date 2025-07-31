@@ -2,11 +2,11 @@ import bpy
 
 import rr_avatar_tools
 import rr_avatar_tools.resources
-from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
-from rr_avatar_tools.properties import AvatarExportGroupProperty
+from rr_avatar_tools.roomie.panels.base import RecRoomRoomiePanel
+from rr_avatar_tools.properties import RoomieExportGroupProperty
 
 
-class SCENE_UL_RRAvatarExportGroupList(bpy.types.UIList):
+class SCENE_UL_RRRoomieExportGroupList(bpy.types.UIList):
     nop: bpy.props.BoolProperty(default=False)
 
     def get_bounding_box_prop(self, name):
@@ -101,7 +101,7 @@ class SCENE_UL_RRAvatarExportGroupList(bpy.types.UIList):
 
             # Selectability
             subrow.operator(
-                "rr.export_select_avatar_item_meshes",
+                "rr.export_select_roomie_item_meshes",
                 icon="RESTRICT_SELECT_OFF",
                 text="",
             ).target = collection.name
@@ -120,7 +120,7 @@ class SCENE_UL_RRAvatarExportGroupList(bpy.types.UIList):
 
             # Delete
             subrow.operator(
-                "rr.export_delete_avatar_item", icon="TRASH", text=""
+                "rr.export_delete_roomie_item", icon="TRASH", text=""
             ).target = collection.name
 
         elif self.layout_type == "GRID":
@@ -128,13 +128,13 @@ class SCENE_UL_RRAvatarExportGroupList(bpy.types.UIList):
             layout.label(text="")
 
 
-class SCENE_PT_RRAvatarToolsAvatarExportPanel(RecRoomAvatarPanel):
+class SCENE_PT_RRAvatarToolsRoomieExportPanel(RecRoomRoomiePanel):
     """Creates a panel in the object properties window."""
 
-    bl_label = "Avatar Items"
+    bl_label = "Roomie Items"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "Rec Room Avatar Tools"
+    bl_category = "Rec Room Roomie Tools"
 
     def draw_header(self, context):
         self.layout.label(text="", icon="MATCLOTH")
@@ -146,16 +146,16 @@ class SCENE_PT_RRAvatarToolsAvatarExportPanel(RecRoomAvatarPanel):
         # LOD Toggle buttons
         row = layout.row(align=True)
         row.operator(
-            "rr.export_toggle_avatar_item_visibility_by_lod", text="ALL"
+            "rr.export_toggle_roomie_item_visibility_by_lod", text="ALL"
         ).lod = "ALL"
         row.operator(
-            "rr.export_toggle_avatar_item_visibility_by_lod", text="LOD0"
+            "rr.export_toggle_roomie_item_visibility_by_lod", text="LOD0"
         ).lod = "LOD0"
         row.operator(
-            "rr.export_toggle_avatar_item_visibility_by_lod", text="LOD1"
+            "rr.export_toggle_roomie_item_visibility_by_lod", text="LOD1"
         ).lod = "LOD1"
         row.operator(
-            "rr.export_toggle_avatar_item_visibility_by_lod", text="LOD2"
+            "rr.export_toggle_roomie_item_visibility_by_lod", text="LOD2"
         ).lod = "LOD2"
 
         # Collection visibility buttons
@@ -173,17 +173,17 @@ class SCENE_PT_RRAvatarToolsAvatarExportPanel(RecRoomAvatarPanel):
         if mb_collection:
             row.prop(mb_collection, "hide_viewport", text="Modern Bean")
 
-        children = rr_avatar_tools.data.avatar_items
+        children = rr_avatar_tools.data.roomie_items
         rows = 5 if children else 3
 
         row = layout.row()
         row.template_list(
-            "SCENE_UL_RRAvatarExportGroupList",
+            "SCENE_UL_RRRoomieExportGroupList",
             "Export List",
             scene,
-            "avatar_export_list",
+            "roomie_export_list",
             scene,
-            "avatar_export_list_index",
+            "roomie_export_list_index",
             rows=rows,
         )
 
@@ -193,15 +193,15 @@ class SCENE_PT_RRAvatarToolsAvatarExportPanel(RecRoomAvatarPanel):
         row = layout.row()
         row.scale_y = 2
 
-        row.operator("rr.export_generic_avatar_items", text="Export Avatar Items")
+        row.operator("rr.export_generic_roomie_items", text="Export Roomie Items")
         row = layout.row(align=True)
         row.prop(prefs, "generic_export_path", text="Path")
         row.prop(prefs, "copy_images_on_export", icon="IMAGE_DATA", text="")
 
 
 classes = (
-    SCENE_PT_RRAvatarToolsAvatarExportPanel,
-    SCENE_UL_RRAvatarExportGroupList,
+    SCENE_PT_RRAvatarToolsRoomieExportPanel,
+    SCENE_UL_RRRoomieExportGroupList,
 )
 
 preview_collections = None
@@ -221,18 +221,18 @@ def register():
         bpy.utils.register_class(class_)
 
     try:
-        bpy.types.Scene.avatar_export_list = bpy.props.CollectionProperty(
-            type=AvatarExportGroupProperty
+        bpy.types.Scene.roomie_export_list = bpy.props.CollectionProperty(
+            type=RoomieExportGroupProperty
         )
 
     # On reload Blender doesn't think ExportGroupProperty has been registered, so register it
     except ValueError:
-        bpy.utils.register_class(AvatarExportGroupProperty)
-        bpy.types.Scene.avatar_export_list = bpy.props.CollectionProperty(
-            type=AvatarExportGroupProperty
+        bpy.utils.register_class(RoomieExportGroupProperty)
+        bpy.types.Scene.roomie_export_list = bpy.props.CollectionProperty(
+            type=RoomieExportGroupProperty
         )
 
-    bpy.types.Scene.avatar_export_list_index = bpy.props.IntProperty(
+    bpy.types.Scene.roomie_export_list_index = bpy.props.IntProperty(
         name="Index for my_list", default=0
     )
 
@@ -241,8 +241,8 @@ def unregister():
     global preview_collection
     bpy.utils.previews.remove(preview_collection)
 
-    del bpy.types.Scene.avatar_export_list
-    del bpy.types.Scene.avatar_export_list_index
+    del bpy.types.Scene.roomie_export_list
+    del bpy.types.Scene.roomie_export_list_index
 
     for class_ in classes:
         bpy.utils.unregister_class(class_)
