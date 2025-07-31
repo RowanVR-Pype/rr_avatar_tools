@@ -177,7 +177,7 @@ class RR_OT_CleanupRebuildFile(RecRoomAvatarOperator):
 
     def execute(self, context):
         bpy.ops.rr.cleanup_scorch_file()
-        bpy.ops.rr.setup_setup_file()
+        bpy.ops.rr.avatar_setup_setup_file()
         bpy.ops.rr.cleanup_recreate_avatar_items()
         bpy.ops.rr.cleanup_put_orphan_objects_in_legacy_collection()
 

@@ -10,6 +10,9 @@ def all():
     il.reload(rr_avatar_tools.budgets)
 
     # Reload operators subpackage
+    il.reload(rr_avatar_tools.operators)
+    il.reload(rr_avatar_tools.operators.setup)
+
     il.reload(rr_avatar_tools.avatar.operators)
     il.reload(rr_avatar_tools.avatar.operators.base)
     il.reload(rr_avatar_tools.avatar.operators.bake)
@@ -24,8 +27,11 @@ def all():
     il.reload(rr_avatar_tools.avatar.operators.update)
     il.reload(rr_avatar_tools.avatar.operators.weights)
 
+    il.reload(rr_avatar_tools.roomie.operators)
+    il.reload(rr_avatar_tools.roomie.operators.setup)
+
     # Reload panels subpackage
-    il.reload(rr_avatar_tools.panels)
+    il.reload(rr_avatar_tools.avatar.panels)
     il.reload(rr_avatar_tools.avatar.panels.base)
     il.reload(rr_avatar_tools.avatar.panels.body)
     il.reload(rr_avatar_tools.avatar.panels.bounds)
@@ -43,6 +49,10 @@ def all():
     il.reload(rr_avatar_tools.avatar.panels.tools)
     il.reload(rr_avatar_tools.avatar.panels.transfer)
     il.reload(rr_avatar_tools.avatar.panels.update)
+
+    il.reload(rr_avatar_tools.roomie.panels)
+    il.reload(rr_avatar_tools.roomie.panels.main)
+    il.reload(rr_avatar_tools.roomie.panels.setup)
 
     il.reload(rr_avatar_tools.vendor)
     il.reload(rr_avatar_tools.vendor.rigui)

@@ -1,14 +1,14 @@
 import bpy
 
-from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
+from rr_avatar_tools.roomie.panels.base import RecRoomRoomiePanel
 from rr_avatar_tools import operators
 
 
-class SCENE_PT_RRAvatarToolsSetupPanel(RecRoomAvatarPanel):
+class SCENE_PT_RRRoomieToolsSetupPanel(RecRoomRoomiePanel):
     bl_label = "Setup"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "Rec Room Avatar Tools"
+    bl_category = "Rec Room Roomie Tools"
 
     @classmethod
     def poll(cls, context):
@@ -26,7 +26,7 @@ class SCENE_PT_RRAvatarToolsSetupPanel(RecRoomAvatarPanel):
         column.operator(operator.bl_idname, text=operator.bl_label, icon="FILE_TICK")
 
 
-classes = (SCENE_PT_RRAvatarToolsSetupPanel,)
+classes = (SCENE_PT_RRRoomieToolsSetupPanel,)
 
 
 def register():

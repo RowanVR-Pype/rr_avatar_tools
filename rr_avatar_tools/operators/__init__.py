@@ -1,14 +1,10 @@
-from . import main
 from . import setup
 
 
-modules = (
-    main,
-    setup,
-)
+modules = (setup,)
 
 
-classes = sum((main.classes, setup.classes), ())
+classes = sum([p.classes for p in modules], ())
 
 
 def register():

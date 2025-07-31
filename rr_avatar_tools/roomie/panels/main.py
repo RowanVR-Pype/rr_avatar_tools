@@ -8,7 +8,7 @@ class SCENE_PT_RRRoomieToolsMainPanel(RecRoomRoomiePanel):
     """Main Rec Room Avatar Tools Panel"""
 
     bl_label = f"Rec Room Roomie Tools v{rr_avatar_tools.__version__}"
-    bl_idname = "SCENE_PT_RRAvatarToolsMainPanel"
+    bl_idname = "SCENE_PT_RRRoomieToolsMainPanel"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Rec Room Roomie Tools"

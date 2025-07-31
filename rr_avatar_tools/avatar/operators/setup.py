@@ -7,10 +7,10 @@ from rr_avatar_tools.preferences import RRAvatarToolsPreferences
 from rr_avatar_tools.utils import put_file_in_known_good_state
 
 
-class RR_OT_SetupSetupFile(bpy.types.Operator):
+class RR_OT_AvatarSetupSetupFile(bpy.types.Operator):
     """Setup file for avatar work"""
 
-    bl_idname = "rr.setup_setup_file"
+    bl_idname = "rr.avatar_setup_setup_file"
     bl_label = "Setup File"
     bl_options = {"REGISTER", "UNDO"}
 
@@ -410,7 +410,7 @@ class RR_OT_SetupTestOutfits(bpy.types.Operator):
 
 
 classes = (
-    RR_OT_SetupSetupFile,
+    RR_OT_AvatarSetupSetupFile,
     RR_OT_SetupEnsureCollections,
     RR_OT_SetupImportFullBodyMeshes,
     RR_OT_SetupImportModernBeanBodyMeshes,
