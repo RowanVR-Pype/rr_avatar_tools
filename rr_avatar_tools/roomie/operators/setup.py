@@ -1,5 +1,7 @@
 import bpy
 
+from rr_avatar_tools.preferences import RRAvatarToolsPreferences
+
 
 class RR_OT_RoomieSetupSetupFile(bpy.types.Operator):
     """Setup file for avatar work"""
@@ -11,7 +13,7 @@ class RR_OT_RoomieSetupSetupFile(bpy.types.Operator):
     rr_require_source_art_path = True
     rr_required_mode = "OBJECT"
 
-    suboperations = ()
+    suboperations = (bpy.ops.rr.setup_roomie_ensure_collections,)
 
     @classmethod
     def poll(cls, context):
@@ -34,7 +36,40 @@ class RR_OT_RoomieSetupSetupFile(bpy.types.Operator):
         return {"FINISHED"}
 
 
-classes = (RR_OT_RoomieSetupSetupFile,)
+class RR_OT_SetupRoomieEnsureCollections(bpy.types.Operator):
+    """Create roomie collections"""
+
+    bl_idname = "rr.setup_roomie_ensure_collections"
+    bl_label = "Create Roomie Collections"
+    bl_options = {"REGISTER", "UNDO"}
+
+    @classmethod
+    def preferences(self) -> RRAvatarToolsPreferences:
+        return bpy.context.preferences.addons["rr_avatar_tools"].preferences
+
+    @classmethod
+    def poll(cls, context):
+        if not bpy.data.collections.get("Roomie"):
+            return True
+
+        return False
+
+    def find_or_create_collection(self, name):
+        result = bpy.data.collections.get(name)
+
+        if not result:
+            result = bpy.data.collections.new(name)
+            bpy.context.scene.collection.children.link(result)
+
+        return result
+
+    def execute(self, context):
+        self.find_or_create_collection("Roomie")
+
+        return {"FINISHED"}
+
+
+classes = (RR_OT_RoomieSetupSetupFile, RR_OT_SetupRoomieEnsureCollections)
 
 
 def register():

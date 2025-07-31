@@ -28,6 +28,8 @@ def all():
     il.reload(rr_avatar_tools.avatar.operators.weights)
 
     il.reload(rr_avatar_tools.roomie.operators)
+    il.reload(rr_avatar_tools.roomie.operators.export)
+    il.reload(rr_avatar_tools.roomie.operators.create)
     il.reload(rr_avatar_tools.roomie.operators.setup)
 
     # Reload panels subpackage
@@ -51,6 +53,9 @@ def all():
     il.reload(rr_avatar_tools.avatar.panels.update)
 
     il.reload(rr_avatar_tools.roomie.panels)
+    il.reload(rr_avatar_tools.roomie.panels.create)
+    il.reload(rr_avatar_tools.roomie.panels.everything)
+    il.reload(rr_avatar_tools.roomie.panels.export)
     il.reload(rr_avatar_tools.roomie.panels.main)
     il.reload(rr_avatar_tools.roomie.panels.setup)
 

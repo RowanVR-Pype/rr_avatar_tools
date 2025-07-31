@@ -1,7 +1,8 @@
 from . import setup
 from . import export
+from . import create
 
-packages = (setup, export)
+packages = (setup, create, export)
 
 
 classes = sum([p.classes for p in packages], ())

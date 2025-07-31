@@ -1,4 +1,5 @@
 from . import main
+from . import create
 from . import everything
 from . import export
 from . import setup
@@ -6,13 +7,14 @@ from . import setup
 
 modules = (
     main,
+    create,
     export,
     setup,
     everything,
 )
 
 
-classes = sum((main.classes, export.classes, setup.classes), ())
+classes = sum([m.classes for m in modules], ())
 
 
 def register():
