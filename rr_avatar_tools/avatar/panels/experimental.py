@@ -1,9 +1,9 @@
 import bpy
 
-from rr_avatar_tools.avatar.panels.base import RecRoomOperatorPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarOperatorPanel
 
 
-class SCENE_PT_RRAvatarToolsExperimentalPanel(RecRoomOperatorPanel):
+class SCENE_PT_RRAvatarToolsExperimentalPanel(RecRoomAvatarOperatorPanel):
     bl_label = "Experimental"
     bl_parent_id = "SCENE_PT_RRAvatarToolsToolsPanel"
 

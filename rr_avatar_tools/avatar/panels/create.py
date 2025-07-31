@@ -1,10 +1,10 @@
 import bpy
 
-from rr_avatar_tools.avatar.panels.base import RecRoomOperatorPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarOperatorPanel
 from rr_avatar_tools.avatar import operators
 
 
-class SCENE_PT_RRAvatarToolsCreatePanel(RecRoomOperatorPanel):
+class SCENE_PT_RRAvatarToolsCreatePanel(RecRoomAvatarOperatorPanel):
     bl_label = "Create"
     rr_operators = operators.create.panel
 

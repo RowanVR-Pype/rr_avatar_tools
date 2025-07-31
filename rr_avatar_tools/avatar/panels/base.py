@@ -8,7 +8,7 @@ class RecRoomAvatarPanel(bpy.types.Panel):
         return not bpy.ops.rr.setup_setup_file.poll()
 
 
-class RecRoomOperatorPanel(RecRoomAvatarPanel):
+class RecRoomAvatarOperatorPanel(RecRoomAvatarPanel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "Rec Room Avatar Tools"

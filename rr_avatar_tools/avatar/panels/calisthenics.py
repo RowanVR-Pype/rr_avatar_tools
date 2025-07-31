@@ -1,10 +1,10 @@
 import bpy
 
-from rr_avatar_tools.avatar.panels.base import RecRoomOperatorPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarOperatorPanel
 from rr_avatar_tools.avatar import operators
 
 
-class SCENE_PT_RRAvatarToolsCalisthenicsPanel(RecRoomOperatorPanel):
+class SCENE_PT_RRAvatarToolsCalisthenicsPanel(RecRoomAvatarOperatorPanel):
     bl_label = "Calisthenics"
     rr_operators = operators.cleanup.panel
     bl_parent_id = "SCENE_PT_RRAvatarToolsBodyPanel"

@@ -1,10 +1,10 @@
 import bpy
 
-from rr_avatar_tools.avatar.panels.base import RecRoomOperatorPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarOperatorPanel
 from rr_avatar_tools.avatar import operators
 
 
-class SCENE_PT_RRAvatarToolsTransferPanel(RecRoomOperatorPanel):
+class SCENE_PT_RRAvatarToolsTransferPanel(RecRoomAvatarOperatorPanel):
     bl_label = "Transfer"
     bl_parent_id = "SCENE_PT_RRAvatarToolsToolsPanel"
 
