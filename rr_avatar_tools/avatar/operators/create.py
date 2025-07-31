@@ -8,7 +8,7 @@ from bpy.props import (
     StringProperty,
 )
 
-from rr_avatar_tools.operators.base import (
+from rr_avatar_tools.avatar.operators.base import (
     RecRoomAvatarOperator,
     RecRoomAvatarMeshOperator,
 )

@@ -1,7 +1,7 @@
 import bpy
 
 import rr_avatar_tools
-from rr_avatar_tools.panels.base import RecRoomAvatarPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
 
 
 class SCENE_PT_RRAvatarToolsMainPanel(RecRoomAvatarPanel):

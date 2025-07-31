@@ -1,7 +1,7 @@
 import bpy
 
 import rr_avatar_tools
-from rr_avatar_tools.panels.base import RecRoomAvatarPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
 from rr_avatar_tools.budgets import budgets
 
 
@@ -85,7 +85,7 @@ class SCENE_PT_RRAvatarToolsDiagnosticsPanel(RecRoomAvatarPanel):
             ]:  # self.selected_meshes():
                 results = [
                     op
-                    for op in rr_avatar_tools.operators.diagnostics.classes
+                    for op in rr_avatar_tools.avatar.operators.diagnostics.classes
                     if op.diagnose(mesh)
                 ]
 

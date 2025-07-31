@@ -3,7 +3,7 @@ import os
 import bpy
 
 from rr_avatar_tools import resources
-from rr_avatar_tools.operators.base import (
+from rr_avatar_tools.avatar.operators.base import (
     RecRoomAvatarMeshOperator,
 )
 

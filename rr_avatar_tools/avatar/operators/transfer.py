@@ -8,7 +8,7 @@ from bpy.types import (
     MirrorModifier,
 )
 
-from rr_avatar_tools.operators.base import RecRoomAvatarMeshOperator
+from rr_avatar_tools.avatar.operators.base import RecRoomAvatarMeshOperator
 
 
 class RR_OT_TransferUVs(RecRoomAvatarMeshOperator):

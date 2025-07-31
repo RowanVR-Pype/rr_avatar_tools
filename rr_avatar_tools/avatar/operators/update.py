@@ -1,7 +1,7 @@
 import bpy
 
 
-from rr_avatar_tools.operators.base import (
+from rr_avatar_tools.avatar.operators.base import (
     RecRoomAvatarMeshOperator,
 )
 from rr_avatar_tools.utils import put_file_in_known_good_state

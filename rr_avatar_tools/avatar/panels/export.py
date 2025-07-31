@@ -2,7 +2,7 @@ import bpy
 
 import rr_avatar_tools
 import rr_avatar_tools.resources
-from rr_avatar_tools.panels.base import RecRoomAvatarPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
 from rr_avatar_tools.properties import ExportGroupProperty
 
 

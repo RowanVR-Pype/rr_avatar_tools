@@ -28,8 +28,7 @@ import rr_avatar_tools.reload as reload
 def register():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
-    from rr_avatar_tools import operators
-    from rr_avatar_tools import panels
+    from rr_avatar_tools import avatar
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -37,8 +36,7 @@ def register():
     modules = (
         properties,
         preferences,
-        operators,
-        panels,
+        avatar,
         draw,
         handlers,
         vendor,
@@ -54,8 +52,7 @@ def register():
 def unregister():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
-    from rr_avatar_tools import operators
-    from rr_avatar_tools import panels
+    from rr_avatar_tools import avatar
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -63,8 +60,7 @@ def unregister():
     modules = (
         properties,
         preferences,
-        operators,
-        panels,
+        avatar,
         draw,
         handlers,
         vendor,

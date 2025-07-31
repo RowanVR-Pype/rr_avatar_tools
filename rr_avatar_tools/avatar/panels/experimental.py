@@ -1,6 +1,6 @@
 import bpy
 
-from rr_avatar_tools.panels.base import RecRoomOperatorPanel
+from rr_avatar_tools.avatar.panels.base import RecRoomOperatorPanel
 
 
 class SCENE_PT_RRAvatarToolsExperimentalPanel(RecRoomOperatorPanel):

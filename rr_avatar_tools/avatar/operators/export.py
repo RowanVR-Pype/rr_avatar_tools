@@ -5,7 +5,7 @@ import bpy
 
 import rr_avatar_tools
 import rr_avatar_tools.data
-from rr_avatar_tools.operators.base import RecRoomAvatarOperator
+from rr_avatar_tools.avatar.operators.base import RecRoomAvatarOperator
 from rr_avatar_tools.utils import put_file_in_known_good_state
 
 

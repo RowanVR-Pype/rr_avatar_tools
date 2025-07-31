@@ -1,7 +1,7 @@
 import bpy
 
 import rr_avatar_tools
-import rr_avatar_tools.operators
+import rr_avatar_tools.avatar.operators
 
 
 class SCENE_PT_RRAvatarToolsEverythingPanel(bpy.types.Panel):
@@ -25,7 +25,7 @@ class SCENE_PT_RRAvatarToolsEverythingPanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
 
-        for package in rr_avatar_tools.operators.packages:
+        for package in rr_avatar_tools.avatar.operators.packages:
             col = layout.column(align=True)
             name = package.__name__.split(".")[-1]
             col.label(text=name.capitalize())

@@ -1,6 +1,6 @@
 import bpy
 
-from rr_avatar_tools.operators.base import RecRoomAvatarMeshOperator
+from rr_avatar_tools.avatar.operators.base import RecRoomAvatarMeshOperator
 from rr_avatar_tools.utils import put_file_in_known_good_state
 from rr_avatar_tools.budgets import budgets
 from rr_avatar_tools.bones import bones
@@ -396,7 +396,7 @@ class RR_OT_DiagnosticsFixNgons(RecRoomDiagnosticOperator):
             mesh.hide_set(False)
 
             bpy.ops.object.mode_set(mode="EDIT")
-            #Ensure mesh is visible before fixing
+            # Ensure mesh is visible before fixing
             bpy.ops.mesh.reveal()
             # Select ngons and fix
             bpy.ops.mesh.select_all(action="DESELECT")

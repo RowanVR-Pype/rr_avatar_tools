@@ -263,7 +263,7 @@ def run_diagnostics(old, new):
             collection["has_errors"] |= any(
                 [
                     op
-                    for op in rr_avatar_tools.operators.diagnostics.classes
+                    for op in rr_avatar_tools.avatar.operators.diagnostics.classes
                     if op.diagnose(mesh)
                 ]
             )
