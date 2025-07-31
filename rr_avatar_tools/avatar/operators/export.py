@@ -44,7 +44,11 @@ class RR_OT_ExportGenericAvatarItems(RecRoomAvatarOperator):
             bpy.ops.rr.export_generic_modern_bean_avatar_items()
 
         count = len(
-            [p for p in bpy.context.scene.export_list if p.select and p.can_export()]
+            [
+                p
+                for p in bpy.context.scene.avatar_export_list
+                if p.select and p.can_export()
+            ]
         )
 
         self.report({"INFO"}, f"Exported {count} item(s)")
@@ -71,7 +75,7 @@ class RR_OT_ExportGenericFullBodyAvatarItems(RecRoomAvatarOperator):
         collections = [c.get("rec_room_uuid") for c in cls.export_collections()]
         return [
             i
-            for i in bpy.context.scene.export_list
+            for i in bpy.context.scene.avatar_export_list
             if i.can_export() and i.uuid in collections
         ] or []
 
@@ -144,7 +148,7 @@ class RR_OT_ExportGenericModernBeanAvatarItems(RecRoomAvatarOperator):
         collections = [c.get("rec_room_uuid") for c in cls.export_collections()]
         return [
             i
-            for i in bpy.context.scene.export_list
+            for i in bpy.context.scene.avatar_export_list
             if i.can_export() and i.uuid in collections
         ] or []
 

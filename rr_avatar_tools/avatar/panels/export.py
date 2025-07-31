@@ -6,7 +6,7 @@ from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
 from rr_avatar_tools.properties import ExportGroupProperty
 
 
-class SCENE_UL_RRExportGroupList(bpy.types.UIList):
+class SCENE_UL_RRAvatarExportGroupList(bpy.types.UIList):
     nop: bpy.props.BoolProperty(default=False)
 
     def get_bounding_box_prop(self, name):
@@ -128,7 +128,7 @@ class SCENE_UL_RRExportGroupList(bpy.types.UIList):
             layout.label(text="")
 
 
-class SCENE_PT_RRAvatarToolsExportPanel(RecRoomAvatarPanel):
+class SCENE_PT_RRAvatarToolsAvatarExportPanel(RecRoomAvatarPanel):
     """Creates a panel in the object properties window."""
 
     bl_label = "Avatar Items"
@@ -178,12 +178,12 @@ class SCENE_PT_RRAvatarToolsExportPanel(RecRoomAvatarPanel):
 
         row = layout.row()
         row.template_list(
-            "SCENE_UL_RRExportGroupList",
+            "SCENE_UL_RRAvatarExportGroupList",
             "Export List",
             scene,
-            "export_list",
+            "avatar_export_list",
             scene,
-            "export_list_index",
+            "avatar_export_list_index",
             rows=rows,
         )
 
@@ -200,8 +200,8 @@ class SCENE_PT_RRAvatarToolsExportPanel(RecRoomAvatarPanel):
 
 
 classes = (
-    SCENE_PT_RRAvatarToolsExportPanel,
-    SCENE_UL_RRExportGroupList,
+    SCENE_PT_RRAvatarToolsAvatarExportPanel,
+    SCENE_UL_RRAvatarExportGroupList,
 )
 
 preview_collections = None
@@ -221,18 +221,18 @@ def register():
         bpy.utils.register_class(class_)
 
     try:
-        bpy.types.Scene.export_list = bpy.props.CollectionProperty(
+        bpy.types.Scene.avatar_export_list = bpy.props.CollectionProperty(
             type=ExportGroupProperty
         )
 
     # On reload Blender doesn't think ExportGroupProperty has been registered, so register it
     except ValueError:
         bpy.utils.register_class(ExportGroupProperty)
-        bpy.types.Scene.export_list = bpy.props.CollectionProperty(
+        bpy.types.Scene.avatar_export_list = bpy.props.CollectionProperty(
             type=ExportGroupProperty
         )
 
-    bpy.types.Scene.export_list_index = bpy.props.IntProperty(
+    bpy.types.Scene.avatar_export_list_index = bpy.props.IntProperty(
         name="Index for my_list", default=0
     )
 
@@ -241,8 +241,8 @@ def unregister():
     global preview_collection
     bpy.utils.previews.remove(preview_collection)
 
-    del bpy.types.Scene.export_list
-    del bpy.types.Scene.export_list_index
+    del bpy.types.Scene.avatar_export_list
+    del bpy.types.Scene.avatar_export_list_index
 
     for class_ in classes:
         bpy.utils.unregister_class(class_)

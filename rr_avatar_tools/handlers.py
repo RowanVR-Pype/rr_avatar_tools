@@ -47,11 +47,11 @@ def setup_bounds_list(scene):
 
 
 @bpy.app.handlers.persistent
-def update_export_list(scene):
+def update_avatar_export_list(scene):
     def get_type_from_name(name):
         return name.split("_")[-1].upper()
 
-    export_list = scene.export_list
+    export_list = scene.avatar_export_list
 
     avatar_item_collections: List[bpy.types.Collection]
     avatar_item_collections = [
@@ -91,8 +91,8 @@ def update_export_list(scene):
 
         export_list[i].select &= valid
 
-    if scene.export_list_index >= len(export_list):
-        scene.export_list_index = len(export_list) - 1
+    if scene.avatar_export_list_index >= len(export_list):
+        scene.avatar_export_list_index = len(export_list) - 1
 
 
 def body_meshes() -> List[bpy.types.Object]:
@@ -310,7 +310,7 @@ def check_for_next_diagnostic_run():
 
 
 depsgraph_handlers = (
-    update_export_list,
+    update_avatar_export_list,
     update_mask_list,
     check_for_avatar_item_selection_change,
     run_diagnostics_on_scene_update,

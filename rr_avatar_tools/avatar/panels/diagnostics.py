@@ -25,11 +25,11 @@ class SCENE_PT_RRAvatarToolsDiagnosticsPanel(RecRoomAvatarPanel):
 
         column = layout.column(align=True)
 
-        if not context.scene.export_list:
+        if not context.scene.avatar_export_list:
             return
 
         # Only show diagnostics for selected avatar item
-        prop = context.scene.export_list[context.scene.export_list_index]
+        prop = context.scene.avatar_export_list[context.scene.avatar_export_list_index]
         collections = [
             c
             for c in rr_avatar_tools.data.collections
