@@ -195,13 +195,13 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
 
         # Link in armature
         # TODO: Joshua link in roomie skeleton here
-        rig = bpy.data.objects.get("Avatar_Skeleton")
-        if not rig:
-            self.report({"ERROR"}, "Missing Avatar_Skeleton armature")
-            return {"CANCELLED"}
+        # rig = bpy.data.objects.get("Avatar_Skeleton")
+        # if not rig:
+        #     self.report({"ERROR"}, "Missing Avatar_Skeleton armature")
+        #     return {"CANCELLED"}
 
-        if dest not in rig.users_collection:
-            dest.objects.link(rig)
+        # if dest not in rig.users_collection:
+        #     dest.objects.link(rig)
 
         for mesh in self.selected_meshes():
             # Remove mesh from all collections
@@ -210,6 +210,8 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
 
             dest.objects.link(mesh)
 
+            # TODO: Joshua link in rig
+            """
             modifers = [m for m in mesh.modifiers if m.type == "ARMATURE"]
             if len(modifers) > 1:
                 for m in modifers:
@@ -224,6 +226,7 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
             modifer.object = rig
             modifer.show_on_cage = True
             modifer.show_in_editmode = True
+            """
 
             # TODO: Joshua transfer weights from roomie body mesh
             # if self.transfer_weights:
