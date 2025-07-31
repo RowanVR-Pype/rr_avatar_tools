@@ -29,6 +29,7 @@ def register():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
     from rr_avatar_tools import avatar
+    from rr_avatar_tools import roomie
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -37,6 +38,7 @@ def register():
         properties,
         preferences,
         avatar,
+        roomie,
         draw,
         handlers,
         vendor,
@@ -53,6 +55,7 @@ def unregister():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
     from rr_avatar_tools import avatar
+    from rr_avatar_tools import roomie
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -61,6 +64,7 @@ def unregister():
         properties,
         preferences,
         avatar,
+        roomie,
         draw,
         handlers,
         vendor,
