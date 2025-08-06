@@ -194,14 +194,13 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
             dest["rec_room_roomie_uuid"] = str(uuid.uuid4())
 
         # Link in armature
-        # TODO: Joshua link in roomie skeleton here
-        # rig = bpy.data.objects.get("Avatar_Skeleton")
-        # if not rig:
-        #     self.report({"ERROR"}, "Missing Avatar_Skeleton armature")
-        #     return {"CANCELLED"}
+        rig = bpy.data.objects.get("Roomie_Skeleton")
+        if not rig:
+            self.report({"ERROR"}, "Missing Roomie_Skeleton armature")
+            return {"CANCELLED"}
 
-        # if dest not in rig.users_collection:
-        #     dest.objects.link(rig)
+        if dest not in rig.users_collection:
+            dest.objects.link(rig)
 
         for mesh in self.selected_meshes():
             # Remove mesh from all collections
@@ -210,8 +209,6 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
 
             dest.objects.link(mesh)
 
-            # TODO: Joshua link in rig
-            """
             modifers = [m for m in mesh.modifiers if m.type == "ARMATURE"]
             if len(modifers) > 1:
                 for m in modifers:
@@ -226,22 +223,20 @@ class RR_OT_CreateRoomieInternalItem(RecRoomRoomieMeshOperator):
             modifer.object = rig
             modifer.show_on_cage = True
             modifer.show_in_editmode = True
-            """
 
-            # TODO: Joshua transfer weights from roomie body mesh
-            # if self.transfer_weights:
-            #     # Set body mesh to active selection
-            #     body_mesh = bpy.data.objects.get("BodyMesh_LOD0")
-            #     body_mesh.select_set(True)
-            #     old_active = bpy.context.view_layer.objects.active
-            #     bpy.context.view_layer.objects.active = body_mesh
+            if self.transfer_weights:
+                # Set body mesh to active selection
+                body_mesh = bpy.data.objects.get("Roomie_Mk1_LOD0")
+                body_mesh.select_set(True)
+                old_active = bpy.context.view_layer.objects.active
+                bpy.context.view_layer.objects.active = body_mesh
 
-            #     # Transfer weights
-            #     bpy.ops.rr.weights_transfer_weights_from_active_mesh()
+                # Transfer weights
+                bpy.ops.rr.weights_transfer_weights_from_active_mesh()
 
-            #     # Clear body mesh active and selection
-            #     bpy.context.view_layer.objects.active = old_active
-            #     body_mesh.select_set(False)
+                # Clear body mesh active and selection
+                bpy.context.view_layer.objects.active = old_active
+                body_mesh.select_set(False)
 
         return {"FINISHED"}
 
