@@ -19,3 +19,6 @@
 
 # Python virtual environments
 .venv-[0-9].[0-99]
+
+# Blender auto saves
+*.blend[0-99]
