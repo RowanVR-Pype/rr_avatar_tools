@@ -1,5 +1,6 @@
 from . import main
 from . import create
+from . import diagnostics
 from . import everything
 from . import export
 from . import setup
@@ -9,6 +10,7 @@ modules = (
     main,
     create,
     export,
+    diagnostics,
     setup,
     everything,
 )

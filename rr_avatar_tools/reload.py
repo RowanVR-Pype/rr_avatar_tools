@@ -54,6 +54,7 @@ def all():
 
     il.reload(rr_avatar_tools.roomie.panels)
     il.reload(rr_avatar_tools.roomie.panels.create)
+    il.reload(rr_avatar_tools.roomie.panels.diagnostics)
     il.reload(rr_avatar_tools.roomie.panels.everything)
     il.reload(rr_avatar_tools.roomie.panels.export)
     il.reload(rr_avatar_tools.roomie.panels.main)
