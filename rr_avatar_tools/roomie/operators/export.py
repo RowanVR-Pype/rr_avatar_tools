@@ -220,12 +220,10 @@ class RR_OT_ExportToggleRoomieItemVisibilityByLOD(RecRoomRoomieOperator):
 
                 object_.hide_set(not self.lod in object_.name)
 
-        # TODO: Joshua implement below for roomie?
-        """
-        # Full body meshes
+        # Roomie meshes
         for object_ in [
             o
-            for o in rr_avatar_tools.data.collections["FB_Resources"].objects
+            for o in rr_avatar_tools.data.collections["RM1_Resources"].objects
             if o.type == "MESH" and "LOD" in o.name
         ]:
             if self.lod == "ALL":
@@ -233,21 +231,6 @@ class RR_OT_ExportToggleRoomieItemVisibilityByLOD(RecRoomRoomieOperator):
                 continue
 
             object_.hide_set(not self.lod in object_.name)
-
-        # FB Test outfits
-        if fb_collection := rr_avatar_tools.data.collections.get("FB_TestOutfits"):
-            for avatar_item in [o for o in fb_collection.children]:
-                for object_ in [
-                    o
-                    for o in avatar_item.objects
-                    if o.type == "MESH" and "LOD" in o.name
-                ]:
-                    if self.lod == "ALL":
-                        object_.hide_set(False)
-                        continue
-
-                    object_.hide_set(not self.lod in object_.name)
-        """
 
         return {"FINISHED"}
 
