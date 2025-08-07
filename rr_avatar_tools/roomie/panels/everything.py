@@ -15,9 +15,11 @@ class SCENE_PT_RRRoomieToolsEverythingPanel(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        return bpy.context.preferences.addons[
-            "rr_avatar_tools"
-        ].preferences.show_all_operators
+        prefs = bpy.context.preferences.addons["rr_avatar_tools"].preferences
+        if not prefs.enable_roomie_tools:
+            return False
+
+        return prefs.show_all_operators
 
     def draw_header(self, context):
         self.layout.label(text="", icon="EXPERIMENTAL")

@@ -1,7 +1,7 @@
 import bpy
 
 from rr_avatar_tools.roomie.panels.base import RecRoomRoomiePanel
-from rr_avatar_tools import operators
+from rr_avatar_tools.roomie import operators
 
 
 class SCENE_PT_RRRoomieToolsSetupPanel(RecRoomRoomiePanel):
@@ -12,6 +12,10 @@ class SCENE_PT_RRRoomieToolsSetupPanel(RecRoomRoomiePanel):
 
     @classmethod
     def poll(cls, context):
+        prefs = bpy.context.preferences.addons["rr_avatar_tools"].preferences
+        if not prefs.enable_roomie_tools:
+            return False
+
         return not super().poll(context)
 
     def draw(self, context):
@@ -21,7 +25,7 @@ class SCENE_PT_RRRoomieToolsSetupPanel(RecRoomRoomiePanel):
         column.scale_y = 2
 
         # Ensure file is correctly set up
-        operator = operators.setup.RR_OT_SetupSetupFile
+        operator = operators.setup.RR_OT_RoomieSetupSetupFile
 
         column.operator(operator.bl_idname, text=operator.bl_label, icon="FILE_TICK")
 

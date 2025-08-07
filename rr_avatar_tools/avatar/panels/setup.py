@@ -1,7 +1,7 @@
 import bpy
 
 from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
-from rr_avatar_tools import operators
+from rr_avatar_tools.avatar import operators
 
 
 class SCENE_PT_RRAvatarToolsSetupPanel(RecRoomAvatarPanel):
@@ -21,7 +21,7 @@ class SCENE_PT_RRAvatarToolsSetupPanel(RecRoomAvatarPanel):
         column.scale_y = 2
 
         # Ensure file is correctly set up
-        operator = operators.setup.RR_OT_SetupSetupFile
+        operator = operators.setup.RR_OT_AvatarSetupSetupFile
 
         column.operator(operator.bl_idname, text=operator.bl_label, icon="FILE_TICK")
 

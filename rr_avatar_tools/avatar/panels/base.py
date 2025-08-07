@@ -5,7 +5,7 @@ class RecRoomAvatarPanel(bpy.types.Panel):
     @classmethod
     def poll(cls, context):
         # Ensure that the addon and file is correctly setup
-        return not bpy.ops.rr.setup_setup_file.poll()
+        return not bpy.ops.rr.avatar_setup_setup_file.poll()
 
 
 class RecRoomAvatarOperatorPanel(RecRoomAvatarPanel):

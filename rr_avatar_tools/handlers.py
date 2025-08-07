@@ -282,11 +282,11 @@ def fix_up_old_style_avatar_item_collections(scene):
 @bpy.app.handlers.persistent
 def setup_file(filepath):
     # Only fix up files that have at least once manually clicked setup file
-    if not bpy.context.scene.get("rec_room_setup"):
+    if not bpy.context.scene.get("rec_room_avatar_setup"):
         return
 
-    if bpy.ops.rr.setup_setup_file.poll():
-        bpy.ops.rr.setup_setup_file()
+    if bpy.ops.rr.avatar_setup_setup_file.poll():
+        bpy.ops.rr.avatar_setup_setup_file()
 
     # Hack. Force depsgraph update
     bpy.data.collections[0].hide_viewport = not bpy.data.collections[0].hide_viewport

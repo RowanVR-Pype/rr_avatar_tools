@@ -26,7 +26,7 @@ class RR_OT_AvatarSetupSetupFile(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        if not context.scene.get("rec_room_setup"):
+        if not context.scene.get("rec_room_avatar_setup"):
             return True
 
         return any([op.poll() for op in cls.suboperations])
@@ -40,7 +40,7 @@ class RR_OT_AvatarSetupSetupFile(bpy.types.Operator):
 
             operation()
 
-        context.scene["rec_room_setup"] = True
+        context.scene["rec_room_avatar_setup"] = True
 
         return {"FINISHED"}
 

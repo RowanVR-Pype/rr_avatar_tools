@@ -22,7 +22,7 @@ class RR_OT_RoomieSetupSetupFile(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        if not context.scene.get("rec_room_setup"):
+        if not context.scene.get("rec_room_roomie_setup"):
             return True
 
         return any([op.poll() for op in cls.suboperations])
@@ -36,7 +36,7 @@ class RR_OT_RoomieSetupSetupFile(bpy.types.Operator):
 
             operation()
 
-        context.scene["rec_room_setup"] = True
+        context.scene["rec_room_roomie_setup"] = True
 
         return {"FINISHED"}
 
