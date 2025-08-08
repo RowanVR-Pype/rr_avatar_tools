@@ -7,7 +7,11 @@ def all():
     # Reload package
     il.reload(rr_avatar_tools)
 
-    il.reload(rr_avatar_tools.budgets)
+    il.reload(rr_avatar_tools.avatar.bounds)
+    il.reload(rr_avatar_tools.avatar.budgets)
+
+    il.reload(rr_avatar_tools.roomie.bounds)
+    il.reload(rr_avatar_tools.roomie.budgets)
 
     # Reload operators subpackage
     il.reload(rr_avatar_tools.operators)
@@ -77,12 +81,6 @@ def all():
     il.reload(rr_avatar_tools.properties)
 
     il.reload(rr_avatar_tools.data)
-
-    il.reload(rr_avatar_tools.avatar.bounds)
-    il.reload(rr_avatar_tools.avatar.budget)
-
-    il.reload(rr_avatar_tools.roomie.bounds)
-    il.reload(rr_avatar_tools.roomie.budget)
 
     il.reload(rr_avatar_tools.draw)
 
