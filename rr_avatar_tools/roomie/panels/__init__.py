@@ -1,4 +1,5 @@
 from . import main
+from . import bounds
 from . import create
 from . import diagnostics
 from . import everything
@@ -11,6 +12,7 @@ modules = (
     create,
     export,
     diagnostics,
+    bounds,
     setup,
     everything,
 )

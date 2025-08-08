@@ -56,6 +56,7 @@ def all():
 
     il.reload(rr_avatar_tools.roomie.panels)
     il.reload(rr_avatar_tools.roomie.panels.base)
+    il.reload(rr_avatar_tools.roomie.panels.bounds)
     il.reload(rr_avatar_tools.roomie.panels.create)
     il.reload(rr_avatar_tools.roomie.panels.diagnostics)
     il.reload(rr_avatar_tools.roomie.panels.everything)
@@ -77,7 +78,11 @@ def all():
 
     il.reload(rr_avatar_tools.data)
 
-    il.reload(rr_avatar_tools.bounds)
+    il.reload(rr_avatar_tools.avatar.bounds)
+    il.reload(rr_avatar_tools.avatar.budget)
+
+    il.reload(rr_avatar_tools.roomie.bounds)
+    il.reload(rr_avatar_tools.roomie.budget)
 
     il.reload(rr_avatar_tools.draw)
 

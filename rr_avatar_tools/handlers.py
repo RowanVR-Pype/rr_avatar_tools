@@ -6,7 +6,6 @@ from typing import List
 import bpy
 
 import rr_avatar_tools
-from rr_avatar_tools.avatar.bounds import bounding_boxes
 
 
 @bpy.app.handlers.persistent
@@ -33,17 +32,27 @@ def fix_up_export_list(scene):
 
 
 @bpy.app.handlers.persistent
-def setup_bounds_list(scene):
+def setup_avatar_bounds_list(scene):
     bb_list = bpy.context.scene.avatar_bounding_box_list
     bb_list.clear()
 
-    for name in bounding_boxes:
+    for name in rr_avatar_tools.avatar.bounds.bounding_boxes:
         bb_list.add()
         bb_list[-1].name = name
 
     bb_list.add()
     bb_list[-1].name = "WRIST.BOTH"
     bb_list[-1].select = False
+
+
+@bpy.app.handlers.persistent
+def setup_roomie_bounds_list(scene):
+    bb_list = bpy.context.scene.roomie_bounding_box_list
+    bb_list.clear()
+
+    for name in rr_avatar_tools.roomie.bounds.bounding_boxes:
+        bb_list.add()
+        bb_list[-1].name = name
 
 
 @bpy.app.handlers.persistent
@@ -368,7 +377,8 @@ load_post_handlers = (
     setup_file,
     fix_up_export_list,
     fix_up_old_style_avatar_item_collections,
-    setup_bounds_list,
+    setup_avatar_bounds_list,
+    setup_roomie_bounds_list,
 )
 
 timers = (check_for_next_diagnostic_run,)

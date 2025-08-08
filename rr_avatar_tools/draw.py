@@ -2,7 +2,7 @@ import bpy
 import gpu
 from gpu_extras.batch import batch_for_shader
 
-from rr_avatar_tools.avatar.bounds import bounding_boxes
+import rr_avatar_tools
 
 coords = (
     (-1, -1, -1),  # 0
@@ -56,7 +56,7 @@ cube_batch = batch_for_shader(
 )
 
 
-def draw():
+def draw_avatar_bounding_boxes():
     region = bpy.context.region
     vm = bpy.context.region_data.perspective_matrix
     bounding_box_list = bpy.context.scene.avatar_bounding_box_list
@@ -74,7 +74,53 @@ def draw():
         if not visible:
             continue
 
-        m = bounding_boxes[bb.name]
+        m = rr_avatar_tools.avatar.bounds.bounding_boxes[bb.name]
+        m = vm @ m
+
+        # Wireframe
+        wire_shader.uniform_float("ModelViewProjectionMatrix", m)
+        wire_shader.uniform_float("color", (0, 0, 0, 1))
+        wire_shader.uniform_float("viewportSize", (region.width, region.height))
+        wire_shader.uniform_float("lineWidth", 2)
+
+        wire_batch.draw(wire_shader)
+
+        # Solid
+        cube_shader.uniform_float("ModelViewProjectionMatrix", m)
+        cube_shader.uniform_float("color", (0, 0, 0, 0.25))
+
+        gpu.state.blend_set("ALPHA")
+        gpu.state.face_culling_set("BACK")
+        cube_batch.draw(cube_shader)
+        gpu.state.face_culling_set("NONE")
+        gpu.state.blend_set("NONE")
+
+
+def draw_roomie_bounding_boxes():
+    region = bpy.context.region
+    vm = bpy.context.region_data.perspective_matrix
+    bounding_box_list = bpy.context.scene.roomie_bounding_box_list
+
+    # show_both_wrists = [b for b in bounding_box_list if b.name == "WRIST.BOTH"][
+    #     0
+    # ].select
+    show_both_wrists = False
+
+    for bb in bounding_box_list:
+        visible = bb.select
+
+        if bb.name.startswith("WRIST"):
+            visible |= show_both_wrists
+
+        if not visible:
+            continue
+
+        # m = bounding_boxes[bb.name]
+        m = rr_avatar_tools.roomie.bounds.bounding_boxes.get(bb.name)
+
+        if not m:
+            continue
+
         m = vm @ m
 
         # Wireframe
@@ -97,8 +143,14 @@ def draw():
 
 
 def register():
-    bpy.types.SpaceView3D.draw_handler_add(draw, (), "WINDOW", "POST_VIEW")
+    bpy.types.SpaceView3D.draw_handler_add(
+        draw_avatar_bounding_boxes, (), "WINDOW", "POST_VIEW"
+    )
+    bpy.types.SpaceView3D.draw_handler_add(
+        draw_roomie_bounding_boxes, (), "WINDOW", "POST_VIEW"
+    )
 
 
 def unregister():
-    bpy.types.SpaceView3D.draw_handler_remove(draw, "WINDOW")
+    bpy.types.SpaceView3D.draw_handler_remove(draw_avatar_bounding_boxes, "WINDOW")
+    bpy.types.SpaceView3D.draw_handler_remove(draw_roomie_bounding_boxes, "WINDOW")
