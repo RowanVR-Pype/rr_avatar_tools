@@ -6,7 +6,7 @@ from typing import List
 import bpy
 
 import rr_avatar_tools
-from rr_avatar_tools.bounds import bounding_boxes
+from rr_avatar_tools.avatar.bounds import bounding_boxes
 
 
 @bpy.app.handlers.persistent

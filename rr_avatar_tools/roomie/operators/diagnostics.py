@@ -2,8 +2,8 @@ import bpy
 
 from rr_avatar_tools.roomie.operators.base import RecRoomRoomieMeshOperator
 from rr_avatar_tools.utils import put_file_in_known_good_state
-from rr_avatar_tools.budgets import budgets
-from rr_avatar_tools.bounds import bounding_boxes
+from rr_avatar_tools.roomie.budgets import budgets
+from rr_avatar_tools.roomie.bounds import bounding_boxes
 
 
 class Icons:

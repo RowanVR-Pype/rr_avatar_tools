@@ -2,9 +2,9 @@ import bpy
 
 from rr_avatar_tools.avatar.operators.base import RecRoomAvatarMeshOperator
 from rr_avatar_tools.utils import put_file_in_known_good_state
-from rr_avatar_tools.budgets import budgets
+from rr_avatar_tools.avatar.budgets import budgets
+from rr_avatar_tools.avatar.bounds import bounding_boxes
 from rr_avatar_tools.bones import bones
-from rr_avatar_tools.bounds import bounding_boxes
 
 
 class Icons:

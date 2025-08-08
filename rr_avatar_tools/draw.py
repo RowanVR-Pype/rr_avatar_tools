@@ -2,7 +2,7 @@ import bpy
 import gpu
 from gpu_extras.batch import batch_for_shader
 
-from rr_avatar_tools.bounds import bounding_boxes
+from rr_avatar_tools.avatar.bounds import bounding_boxes
 
 coords = (
     (-1, -1, -1),  # 0

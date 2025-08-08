@@ -2,7 +2,7 @@ import bpy
 
 import rr_avatar_tools
 from rr_avatar_tools.avatar.panels.base import RecRoomAvatarPanel
-from rr_avatar_tools.budgets import budgets
+from rr_avatar_tools.avatar.budgets import budgets
 
 
 class SCENE_PT_RRAvatarToolsDiagnosticsPanel(RecRoomAvatarPanel):

@@ -2,7 +2,7 @@ import bpy
 
 import rr_avatar_tools
 from rr_avatar_tools.roomie.panels.base import RecRoomRoomiePanel
-from rr_avatar_tools.budgets import budgets
+from rr_avatar_tools.roomie.budgets import budgets
 
 
 class SCENE_PT_RRRoomieToolsDiagnosticsPanel(RecRoomRoomiePanel):
