@@ -422,26 +422,10 @@ class RR_OT_RoomieDiagnosticsCheckBounds(RecRoomRoomieDiagnosticOperator):
 
     @classmethod
     def diagnose(cls, mesh):
-        return False
-
-        # TODO: Joshua implement once we have bounding boxes
         parts = mesh.name.upper().split("_")
-        item_type = parts[0].upper()
         outfit_type = parts[-2].upper()
 
         target = outfit_type
-
-        if target == "SHIRT":
-            if item_type == "FB":
-                target = "FB_SHIRT"
-            elif item_type == "MB":
-                target = "MB_SHIRT"
-
-        if target == "WRIST":
-            if mesh.name.endswith(".L"):
-                target = "WRIST.L"
-            elif mesh.name.endswith(".R"):
-                target = "WRIST.R"
 
         bounds = bounding_boxes.get(target, None)
 
