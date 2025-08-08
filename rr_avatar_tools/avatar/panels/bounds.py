@@ -48,9 +48,9 @@ class SCENE_PT_RRBoundsPanel(RecRoomAvatarPanel):
             "SCENE_UL_RRBoundsList",
             "Bounding Box List",
             scene,
-            "bounding_box_list",
+            "avatar_bounding_box_list",
             scene,
-            "bounding_box_list_index",
+            "avatar_bounding_box_list_index",
             rows=rows,
         )
 
@@ -67,17 +67,17 @@ def register():
         bpy.utils.register_class(class_)
 
     try:
-        bpy.types.Scene.bounding_box_list = bpy.props.CollectionProperty(
+        bpy.types.Scene.avatar_bounding_box_list = bpy.props.CollectionProperty(
             type=BoundingBoxProperty
         )
 
     except ValueError:
         bpy.utils.register_class(BoundingBoxProperty)
-        bpy.types.Scene.bounding_box_list = bpy.props.CollectionProperty(
+        bpy.types.Scene.avatar_bounding_box_list = bpy.props.CollectionProperty(
             type=BoundingBoxProperty
         )
 
-    bpy.types.Scene.bounding_box_list_index = bpy.props.IntProperty(
+    bpy.types.Scene.avatar_bounding_box_list_index = bpy.props.IntProperty(
         name="Index for bounding box list", default=0
     )
 

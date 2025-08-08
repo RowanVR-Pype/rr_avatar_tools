@@ -59,7 +59,7 @@ cube_batch = batch_for_shader(
 def draw():
     region = bpy.context.region
     vm = bpy.context.region_data.perspective_matrix
-    bounding_box_list = bpy.context.scene.bounding_box_list
+    bounding_box_list = bpy.context.scene.avatar_bounding_box_list
 
     show_both_wrists = [b for b in bounding_box_list if b.name == "WRIST.BOTH"][
         0

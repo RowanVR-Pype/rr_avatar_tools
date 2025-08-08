@@ -25,7 +25,7 @@ class SCENE_UL_RRRoomieExportGroupList(bpy.types.UIList):
         if target == "WRIST":
             target = "WRIST.BOTH"
 
-        for item in bpy.context.scene.bounding_box_list:
+        for item in bpy.context.scene.avatar_bounding_box_list:
             if item.name.upper() == target:
                 return item
 

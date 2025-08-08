@@ -34,7 +34,7 @@ def fix_up_export_list(scene):
 
 @bpy.app.handlers.persistent
 def setup_bounds_list(scene):
-    bb_list = bpy.context.scene.bounding_box_list
+    bb_list = bpy.context.scene.avatar_bounding_box_list
     bb_list.clear()
 
     for name in bounding_boxes:
