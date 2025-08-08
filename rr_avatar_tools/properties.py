@@ -116,18 +116,19 @@ class RoomieExportGroupProperty(bpy.types.PropertyGroup):
         t = collection.name.split("_")[-1].upper()
 
         if t not in (
-            "BELT",
-            "EAR",
-            "EYE",
-            "HAIR",
             "HAT",
+            "EYE",
+            "WAIST",
             "MOUTH",
-            "NECK",
+            "BACK",
+            "FACE",
             "WRIST",
-            "SHIRT",
-            "SHOULDER",
-            "LEG",
-            "SHOE",
+            "TOPPER",
+            "EAR",
+            "HAIR",
+            "MASK",
+            "WINGS",
+            "NOSE",
         ):
             return "UNKNOWN"
 

@@ -11,21 +11,11 @@ class SCENE_UL_RRRoomieExportGroupList(bpy.types.UIList):
 
     def get_bounding_box_prop(self, name):
         parts = name.upper().split("_")
-        item_type = parts[0].upper()
         outfit_type = parts[-1].upper()
 
         target = outfit_type
 
-        if target == "SHIRT":
-            if item_type == "FB":
-                target = "FB_SHIRT"
-            elif item_type == "MB":
-                target = "MB_SHIRT"
-
-        if target == "WRIST":
-            target = "WRIST.BOTH"
-
-        for item in bpy.context.scene.avatar_bounding_box_list:
+        for item in bpy.context.scene.roomie_bounding_box_list:
             if item.name.upper() == target:
                 return item
 
