@@ -28,6 +28,8 @@ class RRAvatarToolsPreferences(bpy.types.AddonPreferences):
         name="Copy images used in avatar item when exporting", default=False
     )
 
+    enable_roomie_tools: BoolProperty(name="Enable Roomie Tools", default=False)
+
     def draw(self, context):
         layout = self.layout
 
@@ -52,6 +54,13 @@ class RRAvatarToolsPreferences(bpy.types.AddonPreferences):
             col.label(text="Developer Extras")
             col = split.column()
             col.prop(self, "show_all_operators", text="")
+
+            row = layout.row()
+            split = row.split(factor=0.3)
+            col = split.column()
+            col.label(text="Enable Roomie Tools")
+            col = split.column()
+            col.prop(self, "enable_roomie_tools", text="")
 
 
 all = (RRAvatarToolsPreferences,)

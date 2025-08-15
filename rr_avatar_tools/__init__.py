@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Rec Room Avatar Tools",
     "author": "Joshua Skelton",
-    "version": (1, 0, 1),
+    "version": (1, 1, 0),
     "blender": (4, 2, 0),
     "location": "",
     "description": "",
@@ -28,8 +28,9 @@ import rr_avatar_tools.reload as reload
 def register():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
+    from rr_avatar_tools import avatar
+    from rr_avatar_tools import roomie
     from rr_avatar_tools import operators
-    from rr_avatar_tools import panels
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -37,8 +38,9 @@ def register():
     modules = (
         properties,
         preferences,
+        avatar,
+        roomie,
         operators,
-        panels,
         draw,
         handlers,
         vendor,
@@ -54,8 +56,9 @@ def register():
 def unregister():
     from rr_avatar_tools import draw
     from rr_avatar_tools import handlers
+    from rr_avatar_tools import avatar
+    from rr_avatar_tools import roomie
     from rr_avatar_tools import operators
-    from rr_avatar_tools import panels
     from rr_avatar_tools import preferences
     from rr_avatar_tools import properties
     from rr_avatar_tools import vendor
@@ -63,8 +66,9 @@ def unregister():
     modules = (
         properties,
         preferences,
+        avatar,
+        roomie,
         operators,
-        panels,
         draw,
         handlers,
         vendor,

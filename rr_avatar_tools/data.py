@@ -52,5 +52,13 @@ class Data(sys.__class__):
             if not c.library and c.get("rec_room_uuid", False)
         )
 
+    @property
+    def roomie_items(self):
+        return Collection(
+            c
+            for c in bpy.data.collections
+            if not c.library and c.get("rec_room_roomie_uuid", False)
+        )
+
 
 sys.modules[__name__].__class__ = Data

@@ -11,6 +11,8 @@ fb_library = str(Path(__file__).parent / "resources" / "fb_library.blend")
 
 mb_library = str(Path(__file__).parent / "resources" / "mb_library.blend")
 
+rm1_library = str(Path(__file__).parent / "resources" / "rm1_library.blend")
+
 error_icon = str(Path(__file__).parent / "resources" / "icons" / "error-yellow.png")
 
 
@@ -40,6 +42,11 @@ def get(name: str) -> Generator[bpy.types.Object, None, None]:
         if not data_to.objects:
             # Try mb_resources.blend
             with bpy.data.libraries.load(mb_library) as (data_from, data_to):
+                data_to.objects = [a for a in data_from.objects if a == name]
+
+        if not data_to.objects:
+            # Try rm1_resources.blend
+            with bpy.data.libraries.load(rm1_library) as (data_from, data_to):
                 data_to.objects = [a for a in data_from.objects if a == name]
 
         resource = bool(data_to.objects) and data_to.objects[0] or None

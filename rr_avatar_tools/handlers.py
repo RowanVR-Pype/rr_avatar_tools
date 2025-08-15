@@ -6,7 +6,6 @@ from typing import List
 import bpy
 
 import rr_avatar_tools
-from rr_avatar_tools.bounds import bounding_boxes
 
 
 @bpy.app.handlers.persistent
@@ -33,11 +32,11 @@ def fix_up_export_list(scene):
 
 
 @bpy.app.handlers.persistent
-def setup_bounds_list(scene):
-    bb_list = bpy.context.scene.bounding_box_list
+def setup_avatar_bounds_list(scene):
+    bb_list = bpy.context.scene.avatar_bounding_box_list
     bb_list.clear()
 
-    for name in bounding_boxes:
+    for name in rr_avatar_tools.avatar.bounds.bounding_boxes:
         bb_list.add()
         bb_list[-1].name = name
 
@@ -47,11 +46,21 @@ def setup_bounds_list(scene):
 
 
 @bpy.app.handlers.persistent
-def update_export_list(scene):
+def setup_roomie_bounds_list(scene):
+    bb_list = bpy.context.scene.roomie_bounding_box_list
+    bb_list.clear()
+
+    for name in rr_avatar_tools.roomie.bounds.bounding_boxes:
+        bb_list.add()
+        bb_list[-1].name = name
+
+
+@bpy.app.handlers.persistent
+def update_avatar_export_list(scene):
     def get_type_from_name(name):
         return name.split("_")[-1].upper()
 
-    export_list = scene.export_list
+    export_list = scene.avatar_export_list
 
     avatar_item_collections: List[bpy.types.Collection]
     avatar_item_collections = [
@@ -91,8 +100,55 @@ def update_export_list(scene):
 
         export_list[i].select &= valid
 
-    if scene.export_list_index >= len(export_list):
-        scene.export_list_index = len(export_list) - 1
+    if scene.avatar_export_list_index >= len(export_list):
+        scene.avatar_export_list_index = len(export_list) - 1
+
+
+@bpy.app.handlers.persistent
+def update_roomie_export_list(scene):
+    def get_type_from_name(name):
+        return name.split("_")[-1].upper()
+
+    export_list = scene.roomie_export_list
+
+    roomie_item_collections: List[bpy.types.Collection]
+    roomie_item_collections = [i for i in rr_avatar_tools.data.roomie_items]
+
+    # Check if the export list and child collections are still in sync
+    if len(roomie_item_collections) == len(export_list):
+        uuids = [c.get("rec_room_roomie_uuid") for c in roomie_item_collections]
+        types = [get_type_from_name(c.name) for c in roomie_item_collections]
+
+        data = zip(uuids, types, export_list)
+
+        # Ensure uuids and types are in sync
+        if all(
+            uuid_ == prop.uuid and type_ == prop.type() for uuid_, type_, prop in data
+        ):
+            return
+
+    lookup = {prop.uuid: prop.select for prop in export_list}
+
+    # Recreate export list from collections
+    export_list.clear()
+
+    for i, collection in enumerate(roomie_item_collections):
+        valid = collection.name[:4] in ("RM1_",)
+
+        # Add to export list
+        export_list.add()
+        export_list[i].name = collection.name
+        export_list[i].uuid = collection["rec_room_roomie_uuid"]
+
+        # Preserve selection
+        select = lookup.get(collection["rec_room_roomie_uuid"])
+        if select != None:
+            export_list[i].select = select
+
+        export_list[i].select &= valid
+
+    if scene.avatar_export_list_index >= len(export_list):
+        scene.avatar_export_list_index = len(export_list) - 1
 
 
 def body_meshes() -> List[bpy.types.Object]:
@@ -235,11 +291,11 @@ def fix_up_old_style_avatar_item_collections(scene):
 @bpy.app.handlers.persistent
 def setup_file(filepath):
     # Only fix up files that have at least once manually clicked setup file
-    if not bpy.context.scene.get("rec_room_setup"):
+    if not bpy.context.scene.get("rec_room_avatar_setup"):
         return
 
-    if bpy.ops.rr.setup_setup_file.poll():
-        bpy.ops.rr.setup_setup_file()
+    if bpy.ops.rr.avatar_setup_setup_file.poll():
+        bpy.ops.rr.avatar_setup_setup_file()
 
     # Hack. Force depsgraph update
     bpy.data.collections[0].hide_viewport = not bpy.data.collections[0].hide_viewport
@@ -247,6 +303,11 @@ def setup_file(filepath):
 
 
 def run_diagnostics(old, new):
+    run_avatar_diagnostics(old, new)
+    run_roomie_diagnostics(old, new)
+
+
+def run_avatar_diagnostics(old, new):
     # Do not run diagnostics in edit mode
     if bpy.context.active_object and bpy.context.active_object.mode == "EDIT":
         return
@@ -263,7 +324,30 @@ def run_diagnostics(old, new):
             collection["has_errors"] |= any(
                 [
                     op
-                    for op in rr_avatar_tools.operators.diagnostics.classes
+                    for op in rr_avatar_tools.avatar.operators.diagnostics.classes
+                    if op.diagnose(mesh)
+                ]
+            )
+
+
+def run_roomie_diagnostics(old, new):
+    # Do not run diagnostics in edit mode
+    if bpy.context.active_object and bpy.context.active_object.mode == "EDIT":
+        return
+
+    collections = [
+        c for c in rr_avatar_tools.data.collections if c.get("rec_room_roomie_uuid")
+    ]
+    for collection in collections:
+        collection["has_errors"] = False
+
+        for mesh in [
+            m for m in collection.objects if m.type == "MESH" and "_LOD" in m.name
+        ]:
+            collection["has_errors"] |= any(
+                [
+                    op
+                    for op in rr_avatar_tools.roomie.operators.diagnostics.classes
                     if op.diagnose(mesh)
                 ]
             )
@@ -310,7 +394,8 @@ def check_for_next_diagnostic_run():
 
 
 depsgraph_handlers = (
-    update_export_list,
+    update_avatar_export_list,
+    update_roomie_export_list,
     update_mask_list,
     check_for_avatar_item_selection_change,
     run_diagnostics_on_scene_update,
@@ -320,7 +405,8 @@ load_post_handlers = (
     setup_file,
     fix_up_export_list,
     fix_up_old_style_avatar_item_collections,
-    setup_bounds_list,
+    setup_avatar_bounds_list,
+    setup_roomie_bounds_list,
 )
 
 timers = (check_for_next_diagnostic_run,)
