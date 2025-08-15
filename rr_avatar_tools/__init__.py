@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Rec Room Avatar Tools",
     "author": "Joshua Skelton",
-    "version": (1, 0, "2-dev"),
+    "version": (1, 1, 0),
     "blender": (4, 2, 0),
     "location": "",
     "description": "",
