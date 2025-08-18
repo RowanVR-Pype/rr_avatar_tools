@@ -24,8 +24,6 @@ class RR_OT_CreateRoomieItem(RecRoomRoomieMeshOperator):
     bl_options = {"REGISTER", "UNDO"}
     rr_required_mode = "OBJECT"
 
-    foo: StringProperty(name="Foo", description="Foo")
-
     item_name: StringProperty(name="Item Name", description="")
 
     item_type: bpy.props.EnumProperty(
