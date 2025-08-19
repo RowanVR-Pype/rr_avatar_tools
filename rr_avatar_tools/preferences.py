@@ -43,6 +43,13 @@ class RRAvatarToolsPreferences(bpy.types.AddonPreferences):
         row = layout.row()
         split = row.split(factor=0.3)
         col = split.column()
+        col.label(text="Enable Roomie Tools")
+        col = split.column()
+        col.prop(self, "enable_roomie_tools", text="")
+
+        row = layout.row()
+        split = row.split(factor=0.3)
+        col = split.column()
         col.label(text="Rec Room Internal")
         col = split.column()
         col.prop(self, "rec_room_internal", text="")
@@ -54,13 +61,6 @@ class RRAvatarToolsPreferences(bpy.types.AddonPreferences):
             col.label(text="Developer Extras")
             col = split.column()
             col.prop(self, "show_all_operators", text="")
-
-            row = layout.row()
-            split = row.split(factor=0.3)
-            col = split.column()
-            col.label(text="Enable Roomie Tools")
-            col = split.column()
-            col.prop(self, "enable_roomie_tools", text="")
 
 
 all = (RRAvatarToolsPreferences,)
